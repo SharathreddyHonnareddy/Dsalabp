@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Playlist</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .playlist {
+            list-style-type: none;
+            padding: 0;
+        }
+        .song {
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .song button {
+            background-color: #ff4c4c;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .song button:hover {
+            background-color: #ff1e1e;
+        }
+        input[type="text"] {
+            padding: 10px;
+            margin: 20px 0;
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .add-song-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+        }
+        .add-song-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>My Music Playlist</h1>
+
+        <input type="text" id="songName" placeholder="Enter song name" />
+        <button class="add-song-btn" onclick="addSong()">Add Song</button>
+
+        <ul class="playlist" id="playlist">
+            <!-- Playlist songs will be displayed here -->
+        </ul>
+    </div>
+
+    <script>
+        // Store the songs in an array (could be replaced with API call)
+        let playlist = ["Song 1: Shape of You", "Song 2: Blinding Lights", "Song 3: Levitating"];
+
+        // Function to display the playlist
+        function displayPlaylist() {
+            const playlistContainer = document.getElementById("playlist");
+            playlistContainer.innerHTML = ""; // Clear the list
+
+            playlist.forEach((song, index) => {
+                const li = document.createElement("li");
+                li.className = "song";
+                li.innerHTML = ${song} <button onclick="removeSong(${index})">Remove</button>;
+                playlistContainer.appendChild(li);
+            });
+        }
+
+        // Function to add a song to the playlist
+        function addSong() {
+            const songNameInput = document.getElementById("songName");
+            const songName = songNameInput.value.trim();
+
+            if (songName) {
+                playlist.push(songName);
+                songNameInput.value = ""; // Clear input field
+                displayPlaylist();
+            } else {
+                alert("Please enter a song name.");
+            }
+        }
+
+        // Function to remove a song from the playlist
+        function removeSong(index) {
+            playlist.splice(index, 1);
+            displayPlaylist();
+        }
+
+        // Display the playlist on page load
+        displayPlaylist();
+    </script>
+</body>
+</html>
